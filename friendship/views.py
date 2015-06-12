@@ -20,7 +20,7 @@ def view_friends(request, user_id, template_name='friendship/friend/user_list.ht
     """ View the friends of a user """
     user = get_object_or_404(user_model, id=user_id)
     friends = Friend.objects.friends(user)
-    return render(request, template_name, {get_friendship_context_object_name(): user, 'friends': friends})
+    return render(request, template_name, {get_friendship_context_object_name(): user.id, 'friends': friends})
 
 
 @login_required
