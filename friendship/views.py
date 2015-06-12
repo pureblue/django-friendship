@@ -117,7 +117,7 @@ def followers(request, username, template_name='friendship/follow/followers_list
 def following(request, user_id, template_name='friendship/follow/following_list.html'):
     """ List who this user follows """
 
-    user = get_object_or_404(user_model, user=user_id)
+    user = get_object_or_404(user_model, id=user_id)
     following = Follow.objects.following(user)
 
     return render(request, template_name, {get_friendship_context_object_name(): user, 'following': following})
