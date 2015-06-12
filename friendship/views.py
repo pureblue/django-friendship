@@ -23,7 +23,6 @@ def view_friends(request, user_id, template_name='friendship/friend/user_list.ht
     return render(request, template_name, {get_friendship_context_object_name(): user, 'friends': friends})
 
 
-
 @login_required
 def friendship_add_friend(request, to_username, template_name='friendship/friend/add.html'):
     """ Create a FriendshipRequest """
@@ -115,9 +114,10 @@ def followers(request, username, template_name='friendship/follow/followers_list
     return render(request, template_name, {get_friendship_context_object_name(): user, 'followers': followers})
 
 
-def following(request, username, template_name='friendship/follow/following_list.html'):
+def following(request, user_id, template_name='friendship/follow/following_list.html'):
     """ List who this user follows """
-    user = get_object_or_404(user_model, username=username)
+
+    user = get_object_or_404(user_model, user=user_id)
     following = Follow.objects.following(user)
 
     return render(request, template_name, {get_friendship_context_object_name(): user, 'following': following})
